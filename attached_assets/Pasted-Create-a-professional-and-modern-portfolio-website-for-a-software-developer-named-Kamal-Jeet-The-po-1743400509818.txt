@@ -1,0 +1,96 @@
+Create a professional and modern portfolio website for a software developer named Kamal Jeet. The portfolio should have the following sections:
+
+1. Home Page
+A clean and visually appealing introduction with Kamal Jeet’s name, title ("Software Developer"), and a brief tagline emphasizing his expertise in React.js and modern web technologies.
+
+A professional profile picture and a short bio about his passion for software development, problem-solving, and innovation.
+
+Contact details:
+
+📞 +91 7703805081
+
+📧 Maanu6586@gmail.com
+
+📍 Dwarka Sec-25, New Delhi
+
+🌐 GitHub Portfolio
+
+2. About Section
+A detailed summary of Kamal Jeet’s 2 years of experience in web application development.
+
+Highlight technical expertise, including:
+
+Frontend: React.js, Next.js, React Native, Angular
+
+Backend: Node.js, Firebase, MySQL, MongoDB
+
+APIs: RESTful APIs, API integration
+
+DevOps: Git, CI/CD pipelines, Docker, GitHub Actions
+
+Tools: Jira, Slack, Postman, Swagger
+
+3. Work Experience
+Software Developer (02/2023 - Present)
+Cadence InfoTech
+
+Built responsive websites and applications using React.js and modern frameworks.
+
+Optimized page load time by 40%, improving user experience.
+
+Integrated API services and improved backend performance.
+
+System Administrator (02/2022 - 11/2022)
+Nykaa.com
+
+Managed IT infrastructure, security, and networks.
+
+Automated monitoring and reduced system downtime by 35%.
+
+4. Projects
+Each project should have a title, description, key technologies used, and a screenshot or demo link:
+
+CRC-WB App (11/2024 - Present)
+
+A Clinical Research Center app for doctors, providing essential resources.
+
+Built with React Native, API integrations, and workflow automation.
+
+CRC Web Admin Portal (05/2024 - 10/2023)
+
+Admin panel for content management using React.js.
+
+Enhanced usability and scalability with dynamic API integration.
+
+Apeejay Education App (09/2023 - 05/2024)
+
+An education platform for students and teachers.
+
+Developed portals using React.js, integrated with Moodle & DataLake.
+
+Smart Workflow App (04/2023 - 08/2023)
+
+A task management system for workflow automation.
+
+Built using Adalo & Zapier, reducing manual work.
+
+5. Skills Section
+Frontend: React.js, Next.js, React Native, Angular, HTML5, CSS3, TailwindCSS
+
+Backend: Node.js, Firebase, MongoDB, MySQL
+
+DevOps: Git, CI/CD, GitHub Actions, Jenkins
+
+Testing: Postman, Swagger
+
+Soft Skills: Problem-Solving, Communication, Collaboration, Adaptability
+
+6. Contact Page
+A simple contact form allowing visitors to reach out via email.
+
+Direct links to GitHub, LinkedIn, and Stack Overflow.
+
+7. Open-Source Contributions
+Contributions to React.js UI libraries, Stack Overflow, and GitHub repositories.
+
+Make sure the design is modern, responsive, and optimized for both desktop and mobile users. Use a dark mode option, clean UI elements, and animations for a professional touch.
