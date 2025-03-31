@@ -1,0 +1,115 @@
+%PDF-1.4
+1 0 obj
+<</Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+2 0 obj
+<</Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+3 0 obj
+<</Type /Page
+/Parent 2 0 R
+/Resources 4 0 R
+/MediaBox [0 0 612 792]
+/Contents 5 0 R
+>>
+endobj
+4 0 obj
+<</Font <</F1 6 0 R /F2 7 0 R>>
+>>
+endobj
+5 0 obj
+<</Length 632>>
+stream
+BT
+/F1 24 Tf
+200 700 Td
+(Kamal Jeet) Tj
+ET
+BT
+/F1 16 Tf
+150 670 Td
+(Software Developer) Tj
+ET
+BT
+/F2 12 Tf
+50 640 Td
+(Contact:) Tj
+ET
+BT
+/F2 10 Tf
+50 620 Td
+(Phone: +91 7703805081) Tj
+ET
+BT
+/F2 10 Tf
+50 600 Td
+(Email: Maanu6586@gmail.com) Tj
+ET
+BT
+/F2 10 Tf
+50 580 Td
+(Location: Dwarka Sec-25, New Delhi) Tj
+ET
+BT
+/F1 14 Tf
+50 540 Td
+(SKILLS) Tj
+ET
+BT
+/F2 10 Tf
+50 520 Td
+(Frontend: React, TypeScript, JavaScript, HTML, CSS, TailwindCSS) Tj
+ET
+BT
+/F2 10 Tf
+50 500 Td
+(Backend: Node.js, Express, MongoDB, PostgreSQL) Tj
+ET
+BT
+/F1 14 Tf
+50 460 Td
+(EXPERIENCE) Tj
+ET
+BT
+/F2 10 Tf
+50 440 Td
+(2 years of experience in web application development) Tj
+ET
+endstream
+endobj
+6 0 obj
+<</Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Bold
+/Encoding /WinAnsiEncoding
+>>
+endobj
+7 0 obj
+<</Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+>>
+endobj
+xref
+0 8
+0000000000 65535 f
+0000000009 00000 n
+0000000056 00000 n
+0000000111 00000 n
+0000000212 00000 n
+0000000258 00000 n
+0000000939 00000 n
+0000001041 00000 n
+trailer
+<</Size 8
+/Root 1 0 R
+>>
+startxref
+1138
+%%EOF

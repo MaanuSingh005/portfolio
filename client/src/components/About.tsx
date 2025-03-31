@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
-import { Code, Server, Plug, Cog } from "lucide-react";
+import { Code, Server, Plug, Cog, Download } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import ImageSlideshow from "./ImageSlideshow";
+import cvPdfPath from "../assets/kamal-jeet-cv.pdf";
 
 const About = () => {
   const expertiseItems = [
@@ -113,14 +115,28 @@ const About = () => {
               </div>
             </div>
             
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <a href="#contact" className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 font-medium text-white shadow hover:bg-primary/90 transition-colors">
-                Let's work together
-              </a>
-            </motion.div>
+            <div className="flex flex-wrap gap-4">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <a href="#contact" className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 font-medium text-white shadow hover:bg-primary/90 transition-colors">
+                  Let's work together
+                </a>
+              </motion.div>
+              
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Button variant="outline" asChild className="flex items-center gap-2">
+                  <a href={cvPdfPath} download="kamal-jeet-cv.pdf">
+                    <Download size={16} className="mr-1" />
+                    Resume
+                  </a>
+                </Button>
+              </motion.div>
+            </div>
           </motion.div>
           
           <motion.div

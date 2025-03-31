@@ -26,17 +26,25 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     try {
       const root = window.document.documentElement;
       
+      // First remove any existing theme classes
       root.classList.remove("light", "dark");
       
       if (theme === "system") {
+        // Check system preference
         const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
           ? "dark"
           : "light";
+        
+        // Apply system theme
         root.classList.add(systemTheme);
-        return;
+        console.log(`Applied system theme: ${systemTheme}`);
+      } else {
+        // Apply explicitly selected theme
+        root.classList.add(theme);
+        console.log(`Applied user theme: ${theme}`);
       }
       
-      root.classList.add(theme);
+      // Store user preference
       localStorage.setItem("theme", theme);
     } catch (error) {
       console.error("Error setting theme:", error);
@@ -117,13 +125,16 @@ export function ThemeToggle() {
   const { theme, setTheme } = context;
   
   const toggleTheme = () => {
-    // Toggle between light and dark, preserving system preference
-    if (actualTheme === "light") {
-      console.log("Switching to dark mode");
-      setTheme("dark");
-    } else {
+    const root = window.document.documentElement;
+    const isDark = root.classList.contains("dark");
+    
+    // Directly check what's currently applied rather than relying on state
+    if (isDark) {
       console.log("Switching to light mode");
       setTheme("light");
+    } else {
+      console.log("Switching to dark mode");
+      setTheme("dark");
     }
   };
 

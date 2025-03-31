@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, MapPin, Github, Linkedin, ExternalLink } from "lucide-react";
+import { Phone, Mail, MapPin, Github, Linkedin, Download } from "lucide-react";
 import { FaStackOverflow } from "react-icons/fa";
 import ImageSlideshow from "./ImageSlideshow";
+import cvPdfPath from "../assets/kamal-jeet-cv.pdf";
 
 const Home = () => {
   return (
@@ -52,6 +53,12 @@ const Home = () => {
               </Button>
               <Button variant="outline" asChild>
                 <a href="#projects">View projects</a>
+              </Button>
+              <Button variant="secondary" asChild className="flex items-center gap-2">
+                <a href={cvPdfPath} download="kamal-jeet-cv.pdf">
+                  <Download size={16} className="mr-1" />
+                  Download CV
+                </a>
               </Button>
             </div>
             
