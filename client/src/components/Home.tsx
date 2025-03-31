@@ -91,10 +91,19 @@ const Home = () => {
           >
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-primary to-blue-400 rounded-full blur opacity-30 animate-pulse-slow"></div>
-              <div className="relative rounded-full overflow-hidden border-4 border-background w-64 h-64 md:w-80 md:h-80 shadow-lg">
+              <div className="relative rounded-full overflow-hidden border-4 border-background w-64 h-64 md:w-80 md:h-80 shadow-xl">
                 {/* Image Slideshow */}
-                <ImageSlideshow />
+                <ImageSlideshow 
+                  interval={3500}
+                  autoplay={true}
+                  rounded={true}
+                />
               </div>
+              {/* Decorative elements */}
+              <div className="absolute top-0 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-xl"></div>
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-400/10 rounded-full blur-xl"></div>
+              <div className="absolute -top-1 -right-1 w-6 h-6 bg-primary rounded-full opacity-50"></div>
+              <div className="absolute bottom-10 -right-3 w-4 h-4 bg-blue-400 rounded-full opacity-40"></div>
             </div>
           </motion.div>
         </div>

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Code, Server, Plug, Cog } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import ImageSlideshow from "./ImageSlideshow";
 
 const About = () => {
   const expertiseItems = [
@@ -52,6 +53,28 @@ const About = () => {
           <h2 className="text-3xl font-bold mb-2">About Me</h2>
           <div className="h-1 w-20 mx-auto bg-primary rounded"></div>
         </div>
+        
+        {/* Photo Slideshow */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-20"
+        >
+          <div className="max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl">
+            <ImageSlideshow 
+              interval={4000} 
+              className="w-full" 
+              rounded={false} 
+            />
+          </div>
+          <div className="max-w-2xl mx-auto">
+            <p className="text-center mt-6 text-muted-foreground italic text-lg">
+              "Passionate about turning ideas into elegant code and solving real-world problems"
+            </p>
+          </div>
+        </motion.div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div

@@ -4,19 +4,22 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import profile1 from "../assets/profile1.svg";
 import profile2 from "../assets/profile2.svg";
 import profile3 from "../assets/profile3.svg";
+import profile4 from "../assets/profile4.svg";
 
 interface ImageSlideshowProps {
   autoplay?: boolean;
   interval?: number;
   className?: string;
+  rounded?: boolean;
 }
 
 const ImageSlideshow = ({ 
   autoplay = true, 
   interval: intervalProp = 5000,
-  className = ""
+  className = "",
+  rounded = true
 }: ImageSlideshowProps) => {
-  const images = [profile1, profile2, profile3];
+  const images = [profile1, profile2, profile3, profile4];
   const [currentIndex, setCurrentIndex] = useState(0);
   
   const goToNext = useCallback(() => {
@@ -38,7 +41,7 @@ const ImageSlideshow = ({
   }, [autoplay, intervalProp, goToNext]);
   
   return (
-    <div className={`relative overflow-hidden rounded-2xl ${className}`}>
+    <div className={`relative overflow-hidden ${rounded ? 'rounded-2xl' : ''} ${className}`}>
       <div className="aspect-square relative">
         <AnimatePresence mode="wait">
           <motion.img
