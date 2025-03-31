@@ -111,6 +111,40 @@ export const openSourceContributions = [
   },
 ];
 
+// Education data
+export const education = [
+  {
+    id: 1,
+    degree: "Bachelor of Technology in Computer Science",
+    institution: "Guru Gobind Singh Indraprastha University",
+    location: "Delhi, India",
+    period: "2017 - 2021",
+    description: "Focused on software development, algorithms, and data structures. Graduated with distinction.",
+    courses: ["Data Structures & Algorithms", "Database Management Systems", "Object-Oriented Programming", "Web Development"],
+    achievements: "Received academic excellence scholarship for consecutive 3 years",
+  },
+  {
+    id: 2,
+    degree: "Full-Stack Web Development Certification",
+    institution: "Udemy",
+    location: "Online",
+    period: "2021",
+    description: "Comprehensive program covering modern web development technologies and best practices.",
+    courses: ["React.js", "Node.js", "MongoDB", "Express.js", "RESTful APIs"],
+    achievements: "Completed capstone project with highest rating",
+  },
+  {
+    id: 3,
+    degree: "Senior Secondary Education",
+    institution: "Bloom Public School",
+    location: "New Delhi, India",
+    period: "2015 - 2017",
+    description: "Science stream with focus on Physics, Chemistry, and Mathematics.",
+    courses: ["Physics", "Chemistry", "Mathematics", "Computer Science"],
+    achievements: "School prefect and member of the coding club",
+  }
+];
+
 // Contact information
 export const contactInfo = {
   email: "Maanu6586@gmail.com",

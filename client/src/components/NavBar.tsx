@@ -40,6 +40,7 @@ const NavBar = () => {
     { href: "#home", text: "Home" },
     { href: "#about", text: "About" },
     { href: "#experience", text: "Experience" },
+    { href: "#education", text: "Education" },
     { href: "#projects", text: "Projects" },
     { href: "#skills", text: "Skills" },
     { href: "#contact", text: "Contact" },
