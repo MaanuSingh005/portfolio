@@ -13,24 +13,34 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem("theme") as Theme) || "system"
+    () => {
+      try {
+        return (localStorage.getItem("theme") as Theme) || "system";
+      } catch {
+        return "system";
+      }
+    }
   );
 
   useEffect(() => {
-    const root = window.document.documentElement;
-    
-    root.classList.remove("light", "dark");
-    
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-      root.classList.add(systemTheme);
-      return;
+    try {
+      const root = window.document.documentElement;
+      
+      root.classList.remove("light", "dark");
+      
+      if (theme === "system") {
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+        root.classList.add(systemTheme);
+        return;
+      }
+      
+      root.classList.add(theme);
+      localStorage.setItem("theme", theme);
+    } catch (error) {
+      console.error("Error setting theme:", error);
     }
-    
-    root.classList.add(theme);
-    localStorage.setItem("theme", theme);
   }, [theme]);
 
   return (
@@ -52,6 +62,43 @@ export function ThemeToggle() {
   // Getting theme context directly from the context
   const context = useContext(ThemeContext);
   
+  // Get the actual theme (light or dark) based on the system preference or current setting
+  const getActualTheme = (): "light" | "dark" => {
+    if (!context) return "light";
+    
+    if (context.theme === "system") {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    
+    return context.theme;
+  };
+  
+  // The current actual theme (light or dark)
+  const [actualTheme, setActualTheme] = useState<"light" | "dark">("light");
+  
+  // Update the actual theme when the context theme changes
+  useEffect(() => {
+    if (context) {
+      setActualTheme(getActualTheme());
+    }
+  }, [context?.theme]);
+  
+  // Also listen for system theme changes if using system theme
+  useEffect(() => {
+    if (!context) return;
+    
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    const handleChange = () => {
+      if (context.theme === "system") {
+        setActualTheme(mediaQuery.matches ? "dark" : "light");
+      }
+    };
+    
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, [context]);
+  
   if (!context) {
     // Fallback to a non-functional button if context is missing
     // This prevents the app from crashing
@@ -70,9 +117,12 @@ export function ThemeToggle() {
   const { theme, setTheme } = context;
   
   const toggleTheme = () => {
-    if (theme === "light") {
+    // Toggle between light and dark, preserving system preference
+    if (actualTheme === "light") {
+      console.log("Switching to dark mode");
       setTheme("dark");
     } else {
+      console.log("Switching to light mode");
       setTheme("light");
     }
   };

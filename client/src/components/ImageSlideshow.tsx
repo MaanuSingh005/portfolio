@@ -1,0 +1,93 @@
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import profile1 from "../assets/profile1.svg";
+import profile2 from "../assets/profile2.svg";
+import profile3 from "../assets/profile3.svg";
+
+interface ImageSlideshowProps {
+  autoplay?: boolean;
+  interval?: number;
+  className?: string;
+}
+
+const ImageSlideshow = ({ 
+  autoplay = true, 
+  interval: intervalProp = 5000,
+  className = ""
+}: ImageSlideshowProps) => {
+  const images = [profile1, profile2, profile3];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const goToNext = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  }, [images.length]);
+  
+  const goToPrev = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  }, [images.length]);
+  
+  useEffect(() => {
+    if (!autoplay) return;
+    
+    const intervalId = setInterval(() => {
+      goToNext();
+    }, intervalProp);
+    
+    return () => clearInterval(intervalId);
+  }, [autoplay, intervalProp, goToNext]);
+  
+  return (
+    <div className={`relative overflow-hidden rounded-2xl ${className}`}>
+      <div className="aspect-square relative">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={currentIndex}
+            src={images[currentIndex]}
+            alt={`Profile image ${currentIndex + 1}`}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          />
+        </AnimatePresence>
+      </div>
+      
+      <div className="absolute inset-0 flex items-center justify-between p-4">
+        <button 
+          onClick={goToPrev}
+          className="w-10 h-10 rounded-full bg-background/30 backdrop-blur-sm text-white flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
+          aria-label="Previous image"
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </button>
+        
+        <button 
+          onClick={goToNext}
+          className="w-10 h-10 rounded-full bg-background/30 backdrop-blur-sm text-white flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
+          aria-label="Next image"
+        >
+          <ChevronRight className="h-6 w-6" />
+        </button>
+      </div>
+      
+      <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-2 h-2 rounded-full ${
+              index === currentIndex 
+                ? "bg-primary w-4 transition-all duration-300" 
+                : "bg-white/50"
+            }`}
+            aria-label={`Go to image ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ImageSlideshow;
