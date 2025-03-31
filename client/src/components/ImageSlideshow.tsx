@@ -42,7 +42,7 @@ const ImageSlideshow = ({
   
   return (
     <div className={`relative overflow-hidden ${rounded ? 'rounded-2xl' : ''} ${className}`}>
-      <div className="aspect-square relative">
+      <div className="aspect-video relative"> {/* Changed from aspect-square to aspect-video */}
         <AnimatePresence mode="wait">
           <motion.img
             key={currentIndex}
@@ -57,33 +57,33 @@ const ImageSlideshow = ({
         </AnimatePresence>
       </div>
       
-      <div className="absolute inset-0 flex items-center justify-between p-4">
+      <div className="absolute inset-0 flex items-center justify-between p-2"> {/* Reduced padding */}
         <button 
           onClick={goToPrev}
-          className="w-10 h-10 rounded-full bg-background/30 backdrop-blur-sm text-white flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
+          className="w-8 h-8 rounded-full bg-background/30 backdrop-blur-sm text-white flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
           aria-label="Previous image"
         >
-          <ChevronLeft className="h-6 w-6" />
+          <ChevronLeft className="h-5 w-5" /> {/* Smaller icon */}
         </button>
         
         <button 
           onClick={goToNext}
-          className="w-10 h-10 rounded-full bg-background/30 backdrop-blur-sm text-white flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
+          className="w-8 h-8 rounded-full bg-background/30 backdrop-blur-sm text-white flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
           aria-label="Next image"
         >
-          <ChevronRight className="h-6 w-6" />
+          <ChevronRight className="h-5 w-5" /> {/* Smaller icon */}
         </button>
       </div>
       
-      <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+      <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-1.5"> {/* Smaller indicators */}
         {images.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 rounded-full ${
+            className={`h-1.5 rounded-full ${
               index === currentIndex 
-                ? "bg-primary w-4 transition-all duration-300" 
-                : "bg-white/50"
+                ? "bg-primary w-3 transition-all duration-300" 
+                : "bg-white/50 w-1.5"
             }`}
             aria-label={`Go to image ${index + 1}`}
           />

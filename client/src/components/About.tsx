@@ -62,17 +62,17 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-20"
+          className="mb-14"
         >
-          <div className="max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl">
+          <div className="max-w-xl mx-auto rounded-xl overflow-hidden shadow-lg">
             <ImageSlideshow 
               interval={4000} 
               className="w-full" 
               rounded={false} 
             />
           </div>
-          <div className="max-w-2xl mx-auto">
-            <p className="text-center mt-6 text-muted-foreground italic text-lg">
+          <div className="max-w-xl mx-auto">
+            <p className="text-center mt-4 text-muted-foreground italic">
               "Passionate about turning ideas into elegant code and solving real-world problems"
             </p>
           </div>
