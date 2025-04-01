@@ -132,13 +132,13 @@ export const education = [
     description: "Comprehensive program covering modern web development technologies and best practices.",
     courses: ["React.js", "Node.js", "MongoDB", "Express.js", "RESTful APIs"],
     achievements: "Completed capstone project with highest rating",
-  }
+  },
   {
     id: 3,
     degree: "Diploma in IT enable services and management",
     institution: "Integrated Institute of Technology",
     location: "New Delhi, India",
-    // period: "2015 - 2017",
+    period: "2015 - 2017",
     description: "Science stream with focus on Physics, Chemistry, and Mathematics.",
     courses: ["Physics", "Chemistry", "Mathematics", "Computer Science"],
     achievements: "School prefect and member of the coding club",
