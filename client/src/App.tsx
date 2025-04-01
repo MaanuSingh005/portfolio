@@ -22,6 +22,7 @@ import Admin from "./pages/Admin";
 import AdminSkills from "./pages/AdminSkills";
 import AdminProjects from "./pages/AdminProjects";
 import AdminTheme from "./pages/AdminTheme";
+import AdminLogin from "./pages/AdminLogin";
 import NotFound from "./pages/not-found";
 import AuthPage from "./pages/auth-page";
 
@@ -85,6 +86,9 @@ function App() {
           <ProtectedRoute path="/admin/skills" component={AdminSkills} />
           <ProtectedRoute path="/admin/theme" component={AdminTheme} />
           <ProtectedRoute path="/admin" component={Admin} />
+          
+          {/* Admin login route */}
+          <Route path="/admin/login" component={AdminLogin} />
           
           {/* Auth page */}
           <Route path="/auth" component={AuthPage} />

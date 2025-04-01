@@ -125,23 +125,19 @@ export function ThemeToggle() {
   const { theme, setTheme } = context;
   
   const toggleTheme = () => {
-    const root = window.document.documentElement;
-    const isDark = root.classList.contains("dark");
+    // Get the current theme
+    const currentTheme = theme === 'system' 
+      ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+      : theme;
     
-    // Directly check what's currently applied rather than relying on state
-    if (isDark) {
-      console.log("Switching to light mode");
-      root.classList.remove("dark");
-      root.classList.add("light");
-      localStorage.setItem("theme", "light");
-      setTheme("light");
-    } else {
-      console.log("Switching to dark mode");
-      root.classList.remove("light");
-      root.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-      setTheme("dark");
-    }
+    // Toggle to the opposite theme
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    
+    console.log(`Toggling from ${currentTheme} to ${newTheme}`);
+    
+    // Update theme in context - this will trigger the useEffect in ThemeProvider
+    // which handles the actual DOM updates
+    setTheme(newTheme);
   };
 
   return (
