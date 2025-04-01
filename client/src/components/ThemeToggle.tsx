@@ -131,9 +131,15 @@ export function ThemeToggle() {
     // Directly check what's currently applied rather than relying on state
     if (isDark) {
       console.log("Switching to light mode");
+      root.classList.remove("dark");
+      root.classList.add("light");
+      localStorage.setItem("theme", "light");
       setTheme("light");
     } else {
       console.log("Switching to dark mode");
+      root.classList.remove("light");
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
       setTheme("dark");
     }
   };

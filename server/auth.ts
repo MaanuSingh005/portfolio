@@ -6,6 +6,7 @@ import { scrypt, randomBytes, timingSafeEqual } from "crypto";
 import { promisify } from "util";
 import { storage } from "./storage";
 import { User as SelectUser } from "@shared/schema";
+import bcryptjs from "bcryptjs";
 
 declare global {
   namespace Express {
@@ -16,16 +17,32 @@ declare global {
 const scryptAsync = promisify(scrypt);
 
 async function hashPassword(password: string) {
-  const salt = randomBytes(16).toString("hex");
-  const buf = (await scryptAsync(password, salt, 64)) as Buffer;
-  return `${buf.toString("hex")}.${salt}`;
+  const salt = await bcryptjs.genSalt(10);
+  return await bcryptjs.hash(password, salt);
 }
 
 async function comparePasswords(supplied: string, stored: string) {
-  const [hashed, salt] = stored.split(".");
-  const hashedBuf = Buffer.from(hashed, "hex");
-  const suppliedBuf = (await scryptAsync(supplied, salt, 64)) as Buffer;
-  return timingSafeEqual(hashedBuf, suppliedBuf);
+  try {
+    // Handle bcrypt format (starts with $2b$)
+    if (stored.startsWith('$2b$')) {
+      return await bcryptjs.compare(supplied, stored);
+    }
+    
+    // Handle our custom format (hex.salt)
+    if (stored.includes('.')) {
+      const [hashed, salt] = stored.split(".");
+      if (!salt) throw new Error("Invalid password format: missing salt");
+      
+      const hashedBuf = Buffer.from(hashed, "hex");
+      const suppliedBuf = (await scryptAsync(supplied, salt, 64)) as Buffer;
+      return timingSafeEqual(hashedBuf, suppliedBuf);
+    }
+    
+    throw new Error("Unsupported password format");
+  } catch (error) {
+    console.error("Password comparison error:", error);
+    return false;
+  }
 }
 
 export function setupAuth(app: Express) {
