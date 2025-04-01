@@ -72,6 +72,31 @@ export function setupAuth(app: Express) {
     }
   });
 
+  app.post("/api/auth/register", async (req, res, next) => {
+    try {
+      const existingUser = await storage.getUserByUsername(req.body.username);
+      if (existingUser) {
+        return res.status(400).json({ message: "Username already exists" });
+      }
+
+      const user = await storage.createUser({
+        ...req.body,
+        password: await hashPassword(req.body.password),
+        isAdmin: req.body.username === "admin", // First admin user gets admin privileges
+      });
+
+      req.login(user, (err) => {
+        if (err) return next(err);
+        // Remove the password from the response
+        const { password, ...userWithoutPassword } = user;
+        res.status(201).json(userWithoutPassword);
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+  
+  // Keep the old endpoint for backward compatibility
   app.post("/api/register", async (req, res, next) => {
     try {
       const existingUser = await storage.getUserByUsername(req.body.username);
@@ -96,6 +121,22 @@ export function setupAuth(app: Express) {
     }
   });
 
+  app.post("/api/auth/login", (req, res, next) => {
+    passport.authenticate("local", (err: Error | null, user: Express.User | false, info: { message: string } | undefined) => {
+      if (err) return next(err);
+      if (!user) {
+        return res.status(401).json({ message: "Invalid username or password" });
+      }
+      req.login(user, (err) => {
+        if (err) return next(err);
+        // Remove the password from the response
+        const { password, ...userWithoutPassword } = user as SelectUser;
+        res.status(200).json(userWithoutPassword);
+      });
+    })(req, res, next);
+  });
+  
+  // Keep the old endpoint for backward compatibility
   app.post("/api/login", (req, res, next) => {
     passport.authenticate("local", (err: Error | null, user: Express.User | false, info: { message: string } | undefined) => {
       if (err) return next(err);
@@ -111,6 +152,14 @@ export function setupAuth(app: Express) {
     })(req, res, next);
   });
 
+  app.post("/api/auth/logout", (req, res, next) => {
+    req.logout((err) => {
+      if (err) return next(err);
+      res.sendStatus(200);
+    });
+  });
+  
+  // Keep the old endpoint for backward compatibility
   app.post("/api/logout", (req, res, next) => {
     req.logout((err) => {
       if (err) return next(err);
@@ -118,6 +167,14 @@ export function setupAuth(app: Express) {
     });
   });
 
+  app.get("/api/auth/user", (req, res) => {
+    if (!req.isAuthenticated()) return res.sendStatus(401);
+    // Remove the password from the response
+    const { password, ...userWithoutPassword } = req.user as SelectUser;
+    res.json(userWithoutPassword);
+  });
+  
+  // Keep the old endpoint for backward compatibility
   app.get("/api/user", (req, res) => {
     if (!req.isAuthenticated()) return res.sendStatus(401);
     // Remove the password from the response

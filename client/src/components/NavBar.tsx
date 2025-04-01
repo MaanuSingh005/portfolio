@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, LogIn } from "lucide-react";
+import { Menu, X, LogIn, LogOut } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { useAuth } from "@/hooks/use-auth";
 
 const NavBar = () => {
+  const { user, logoutMutation } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
@@ -71,15 +73,35 @@ const NavBar = () => {
           <div className="flex items-center space-x-4">
             <ThemeToggle />
             
-            {/* Admin Login Button */}
-            <a 
-              href="/auth" 
-              className="hidden md:flex items-center gap-1 px-3 py-2 text-sm bg-primary/10 rounded hover:bg-primary/20 text-primary"
-              title="Admin Login"
-            >
-              <LogIn className="h-4 w-4" />
-              <span>Admin</span>
-            </a>
+            {/* Admin Login/Logout Button */}
+            {user ? (
+              <div className="hidden md:flex items-center space-x-2">
+                <a 
+                  href="/admin" 
+                  className="flex items-center gap-1 px-3 py-2 text-sm bg-primary/10 rounded hover:bg-primary/20 text-primary"
+                  title="Admin Dashboard"
+                >
+                  <span>Dashboard</span>
+                </a>
+                <button 
+                  onClick={() => logoutMutation.mutate()}
+                  className="flex items-center gap-1 px-3 py-2 text-sm bg-red-500/10 rounded hover:bg-red-500/20 text-red-500"
+                  title="Logout"
+                >
+                  <LogOut className="h-4 w-4" />
+                  <span>Logout</span>
+                </button>
+              </div>
+            ) : (
+              <a 
+                href="/auth" 
+                className="hidden md:flex items-center gap-1 px-3 py-2 text-sm bg-primary/10 rounded hover:bg-primary/20 text-primary"
+                title="Admin Login"
+              >
+                <LogIn className="h-4 w-4" />
+                <span>Admin</span>
+              </a>
+            )}
             
             {/* Mobile Menu Button */}
             <button 
@@ -113,15 +135,37 @@ const NavBar = () => {
                 </a>
               ))}
               
-              {/* Admin Login for Mobile */}
-              <a 
-                href="/auth" 
-                onClick={handleMobileNavClick}
-                className="flex items-center gap-1 mt-2 px-3 py-2 bg-primary/10 rounded hover:bg-primary/20 text-primary"
-              >
-                <LogIn className="h-4 w-4" />
-                <span>Admin Login</span>
-              </a>
+              {/* Admin Login/Logout for Mobile */}
+              {user ? (
+                <>
+                  <a 
+                    href="/admin" 
+                    onClick={handleMobileNavClick}
+                    className="flex items-center gap-1 mt-2 px-3 py-2 bg-primary/10 rounded hover:bg-primary/20 text-primary"
+                  >
+                    <span>Admin Dashboard</span>
+                  </a>
+                  <button 
+                    onClick={() => {
+                      handleMobileNavClick();
+                      logoutMutation.mutate();
+                    }}
+                    className="flex items-center gap-1 mt-2 px-3 py-2 w-full bg-red-500/10 rounded hover:bg-red-500/20 text-red-500"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    <span>Logout</span>
+                  </button>
+                </>
+              ) : (
+                <a 
+                  href="/auth" 
+                  onClick={handleMobileNavClick}
+                  className="flex items-center gap-1 mt-2 px-3 py-2 bg-primary/10 rounded hover:bg-primary/20 text-primary"
+                >
+                  <LogIn className="h-4 w-4" />
+                  <span>Admin Login</span>
+                </a>
+              )}
             </nav>
           </motion.div>
         )}
