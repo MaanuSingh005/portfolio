@@ -2,9 +2,6 @@ import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import nodemailer from "nodemailer";
-import session from "express-session";
-import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
 import { z } from "zod";
 import {
   insertUserSchema,
@@ -18,8 +15,7 @@ import {
   insertAboutContentSchema,
   insertContactInfoSchema
 } from "@shared/schema";
-import pgSession from "connect-pg-simple";
-import postgres from "postgres";
+import { setupAuth } from "./auth";
 
 // Middleware to check if user is authenticated
 const requireAuth = (req: Request, res: Response, next: NextFunction) => {
@@ -41,81 +37,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Initialize database with default data
   await storage.initializeDatabase();
   
-  // Setup session with PostgreSQL store if DATABASE_URL is available
-  const sessionOptions: session.SessionOptions = {
-    secret: process.env.SESSION_SECRET || "portfolio-session-secret",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 24, // 1 day
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production"
-    }
-  };
-
-  if (process.env.DATABASE_URL) {
-    const PgSession = pgSession(session);
-    sessionOptions.store = new PgSession({
-      conString: process.env.DATABASE_URL,
-      tableName: 'session',
-      createTableIfMissing: true
-    });
-  }
-
-  app.use(session(sessionOptions));
-  
-  // Initialize Passport
-  app.use(passport.initialize());
-  app.use(passport.session());
-  
-  // Configure passport local strategy
-  passport.use(new LocalStrategy(async (username, password, done) => {
-    try {
-      const user = await storage.validateUser(username, password);
-      if (!user) {
-        return done(null, false, { message: "Invalid username or password" });
-      }
-      return done(null, user);
-    } catch (error) {
-      return done(error);
-    }
-  }));
-  
-  // Serialize user into the session
-  passport.serializeUser((user, done) => {
-    done(null, (user as any).id);
-  });
-  
-  // Deserialize user from the session
-  passport.deserializeUser(async (id: number, done) => {
-    try {
-      const user = await storage.getUser(id);
-      done(null, user);
-    } catch (error) {
-      done(error);
-    }
-  });
-  
-  // Authentication routes
-  app.post("/api/auth/login", passport.authenticate("local"), (req, res) => {
-    res.json({ success: true, user: { id: (req.user as any).id, username: (req.user as any).username, isAdmin: (req.user as any).isAdmin } });
-  });
-  
-  app.post("/api/auth/logout", (req, res) => {
-    req.logout(() => {
-      res.json({ success: true });
-    });
-  });
-  
-  app.get("/api/auth/user", (req, res) => {
-    if (!req.user) {
-      return res.json({ authenticated: false });
-    }
-    return res.json({
-      authenticated: true,
-      user: { id: (req.user as any).id, username: (req.user as any).username, isAdmin: (req.user as any).isAdmin }
-    });
-  });
+  // Setup authentication
+  setupAuth(app);
   
   // Portfolio settings routes
   app.get("/api/settings", async (req, res) => {

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Route, Switch, useLocation } from "wouter";
+import { Route, Switch } from "wouter";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { queryClient } from "./lib/queryClient";
@@ -14,12 +14,16 @@ import OpenSource from "./components/OpenSource";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { motion } from "framer-motion";
+import { AuthProvider } from "./hooks/use-auth";
+import { ProtectedRoute } from "./lib/protected-route";
 
 // Admin pages
-import AdminLogin from "./pages/AdminLogin";
 import Admin from "./pages/Admin";
 import AdminSkills from "./pages/AdminSkills";
+import AdminProjects from "./pages/AdminProjects";
+import AdminTheme from "./pages/AdminTheme";
 import NotFound from "./pages/not-found";
+import AuthPage from "./pages/auth-page";
 
 // Portfolio homepage component
 const Portfolio = () => {
@@ -69,27 +73,30 @@ const Portfolio = () => {
   );
 };
 
-function App() {
-  const [location] = useLocation();
-  
-  // Check if current route is an admin route
-  const isAdminRoute = location.startsWith("/admin");
+// App component implementation
 
+function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Switch>
-        {/* Admin routes */}
-        <Route path="/admin/login" component={AdminLogin} />
-        <Route path="/admin/skills" component={AdminSkills} />
-        <Route path="/admin" component={Admin} />
-        
-        {/* Portfolio route */}
-        <Route path="/" component={Portfolio} />
-        
-        {/* 404 route */}
-        <Route component={NotFound} />
-      </Switch>
-      <Toaster />
+      <AuthProvider>
+        <Switch>
+          {/* Admin routes */}
+          <ProtectedRoute path="/admin/projects" component={AdminProjects} />
+          <ProtectedRoute path="/admin/skills" component={AdminSkills} />
+          <ProtectedRoute path="/admin/theme" component={AdminTheme} />
+          <ProtectedRoute path="/admin" component={Admin} />
+          
+          {/* Auth page */}
+          <Route path="/auth" component={AuthPage} />
+          
+          {/* Portfolio route */}
+          <Route path="/" component={Portfolio} />
+          
+          {/* 404 route */}
+          <Route component={NotFound} />
+        </Switch>
+        <Toaster />
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

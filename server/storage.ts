@@ -16,6 +16,8 @@ import postgres from "postgres";
 import bcrypt from "bcryptjs";
 
 // Define the storage interface
+import session from "express-session";
+
 export interface IStorage {
   // User management
   getUser(id: number): Promise<User | undefined>;
@@ -78,7 +80,14 @@ export interface IStorage {
   
   // Database initialization
   initializeDatabase(): Promise<void>;
+  
+  // Session store
+  sessionStore: session.Store;
 }
+
+// Import memory store for session management
+import createMemoryStore from "memorystore";
+const MemoryStore = createMemoryStore(session);
 
 // In-memory storage implementation (for development/testing)
 export class MemStorage implements IStorage {
@@ -92,6 +101,7 @@ export class MemStorage implements IStorage {
   private openSourceData: Map<number, OpenSourceContribution>;
   private aboutContentData: Map<number, AboutContent>;
   private contactInfoData: Map<number, ContactInfo>;
+  public sessionStore: session.Store;
   
   private currentId: {
     users: number;
@@ -117,6 +127,10 @@ export class MemStorage implements IStorage {
     this.openSourceData = new Map();
     this.aboutContentData = new Map();
     this.contactInfoData = new Map();
+    
+    this.sessionStore = new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    });
     
     this.currentId = {
       users: 1,
@@ -541,9 +555,14 @@ export class MemStorage implements IStorage {
 }
 
 // PostgreSQL storage implementation
+// Import PostgreSQL session store
+import connectPg from "connect-pg-simple";
+const PostgresSessionStore = connectPg(session);
+
 export class PostgresStorage implements IStorage {
   private db: ReturnType<typeof drizzle>;
   private client: ReturnType<typeof postgres>;
+  public sessionStore: session.Store;
   
   constructor() {
     // Initialize the PostgreSQL client
@@ -554,6 +573,13 @@ export class PostgresStorage implements IStorage {
     
     this.client = postgres(connectionString);
     this.db = drizzle(this.client);
+    
+    // Create the PostgreSQL session store
+    this.sessionStore = new PostgresSessionStore({
+      conString: connectionString,
+      createTableIfMissing: true,
+      tableName: 'session'
+    });
   }
   
   // User management methods
