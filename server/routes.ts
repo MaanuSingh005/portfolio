@@ -484,6 +484,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // Project reordering
+  app.post("/api/projects/reorder", requireAdmin, async (req, res) => {
+    try {
+      const { projectIds } = req.body;
+      
+      if (!Array.isArray(projectIds)) {
+        return res.status(400).json({ message: "projectIds must be an array" });
+      }
+      
+      // Validate all projects exist
+      const allProjects = await storage.getProjects();
+      const projectIdsSet = new Set(allProjects.map((p: any) => p.id));
+      
+      for (const id of projectIds) {
+        if (!projectIdsSet.has(id)) {
+          return res.status(404).json({ message: `Project with ID ${id} not found` });
+        }
+      }
+      
+      // Update display order for each project
+      const updates = [];
+      for (let i = 0; i < projectIds.length; i++) {
+        updates.push(
+          storage.updateProject(projectIds[i], { displayOrder: i })
+        );
+      }
+      
+      await Promise.all(updates);
+      
+      // Return the updated projects
+      const updatedProjects = await storage.getProjects();
+      res.json(updatedProjects);
+    } catch (error) {
+      console.error("Error reordering projects:", error);
+      res.status(500).json({ message: "Failed to reorder projects" });
+    }
+  });
+  
   app.delete("/api/projects/:id", requireAdmin, async (req, res) => {
     try {
       const id = parseInt(req.params.id);
