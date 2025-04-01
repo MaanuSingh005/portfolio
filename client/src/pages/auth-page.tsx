@@ -34,10 +34,7 @@ export default function AuthPage() {
   const [activeTab, setActiveTab] = useState<"login" | "register">("login");
   const { toast } = useToast();
 
-  // Redirect if user is already logged in
-  if (user) {
-    return <Redirect to="/admin" />;
-  }
+  // We'll handle redirect in JSX return to avoid early returns that cause hook issues
 
   const loginForm = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -65,6 +62,11 @@ export default function AuthPage() {
     registerMutation.mutate(registerData);
   };
 
+  // Include redirect logic in return
+  if (user) {
+    return <Redirect to="/admin" />;
+  }
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8">
