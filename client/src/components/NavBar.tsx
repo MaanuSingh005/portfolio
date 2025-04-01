@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const NavBar = () => {
@@ -71,6 +71,16 @@ const NavBar = () => {
           <div className="flex items-center space-x-4">
             <ThemeToggle />
             
+            {/* Admin Login Button */}
+            <a 
+              href="/auth" 
+              className="hidden md:flex items-center gap-1 px-3 py-2 text-sm bg-primary/10 rounded hover:bg-primary/20 text-primary"
+              title="Admin Login"
+            >
+              <LogIn className="h-4 w-4" />
+              <span>Admin</span>
+            </a>
+            
             {/* Mobile Menu Button */}
             <button 
               className="md:hidden text-foreground"
@@ -102,6 +112,16 @@ const NavBar = () => {
                   {link.text}
                 </a>
               ))}
+              
+              {/* Admin Login for Mobile */}
+              <a 
+                href="/auth" 
+                onClick={handleMobileNavClick}
+                className="flex items-center gap-1 mt-2 px-3 py-2 bg-primary/10 rounded hover:bg-primary/20 text-primary"
+              >
+                <LogIn className="h-4 w-4" />
+                <span>Admin Login</span>
+              </a>
             </nav>
           </motion.div>
         )}

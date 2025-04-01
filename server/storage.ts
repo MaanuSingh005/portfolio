@@ -550,7 +550,34 @@ export class MemStorage implements IStorage {
   
   // Initialize the database with default data
   async initializeDatabase(): Promise<void> {
-    // No initialization needed for memory storage
+    try {
+      // Always ensure admin user exists with fixed credentials
+      let adminUser = await this.getUserByUsername("admin");
+      
+      if (!adminUser) {
+        await this.createUser({
+          username: "admin",
+          password: "admin123",
+          isAdmin: true,
+        });
+        console.log("Created default admin user. Username: admin, Password: admin123");
+      }
+      
+      // Create default portfolio settings if none exist
+      const existingSettings = await this.getPortfolioSettings();
+      if (!existingSettings) {
+        await this.updatePortfolioSettings({
+          primary: "#3b82f6",
+          variant: "professional",
+          appearance: "system",
+          radius: 8,
+          siteTitle: "Kamal Jeet - Software Developer",
+        });
+        console.log("Created default portfolio settings");
+      }
+    } catch (error) {
+      console.error("Error initializing memory storage:", error);
+    }
   }
 }
 
@@ -967,14 +994,12 @@ export class PostgresStorage implements IStorage {
   // Initialize database with default admin user and settings
   async initializeDatabase(): Promise<void> {
     try {
-      // Create admin user if none exists
-      const existingAdmin = await this.db
-        .select()
-        .from(users)
-        .where(eq(users.isAdmin, true))
-        .limit(1);
+      // Always ensure the admin user exists with fixed credentials
+      // Check if admin user exists
+      let adminUser = await this.getUserByUsername("admin");
       
-      if (existingAdmin.length === 0) {
+      // Create admin if it doesn't exist
+      if (!adminUser) {
         // Create default admin user
         await this.createUser({
           username: "admin",
