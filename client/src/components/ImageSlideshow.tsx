@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import profile1 from "../assets/profile1.svg";
-import profile2 from "../assets/profile2.svg";
-import profile3 from "../assets/profile3.svg";
-import profile4 from "../assets/profile4.svg";
+// Import the actual photos
+import photo1 from "../assets/photos/photo_2025-03-31_13-15-54.jpg";
+import photo2 from "../assets/photos/photo_2025-03-31_13-15-56.jpg";
+import photo3 from "../assets/photos/photo_2025-03-31_13-15-58.jpg";
+import photo4 from "../assets/photos/photo_2025-03-31_13-15-59.jpg";
+import photo5 from "../assets/photos/photo_2025-03-31_14-11-05.jpg";
 
 interface ImageSlideshowProps {
   autoplay?: boolean;
@@ -19,7 +21,7 @@ const ImageSlideshow = ({
   className = "",
   rounded = true
 }: ImageSlideshowProps) => {
-  const images = [profile1, profile2, profile3, profile4];
+  const images = [photo1, photo2, photo3, photo4, photo5];
   const [currentIndex, setCurrentIndex] = useState(0);
   
   const goToNext = useCallback(() => {
