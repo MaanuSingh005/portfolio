@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Route, Switch, useLocation } from "wouter";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { queryClient } from "./lib/queryClient";
@@ -14,7 +15,14 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { motion } from "framer-motion";
 
-function App() {
+// Admin pages
+import AdminLogin from "./pages/AdminLogin";
+import Admin from "./pages/Admin";
+import AdminSkills from "./pages/AdminSkills";
+import NotFound from "./pages/not-found";
+
+// Portfolio homepage component
+const Portfolio = () => {
   // Smooth scroll to section when URL hash changes
   useEffect(() => {
     const handleHashChange = () => {
@@ -40,25 +48,47 @@ function App() {
   }, []);
 
   return (
+    <div className="min-h-screen bg-background text-foreground">
+      <NavBar />
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Home />
+        <About />
+        <Experience />
+        <Education />
+        <Projects />
+        <Skills />
+        <OpenSource />
+        <Contact />
+      </motion.main>
+      <Footer />
+    </div>
+  );
+};
+
+function App() {
+  const [location] = useLocation();
+  
+  // Check if current route is an admin route
+  const isAdminRoute = location.startsWith("/admin");
+
+  return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen bg-background text-foreground">
-        <NavBar />
-        <motion.main
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Home />
-          <About />
-          <Experience />
-          <Education />
-          <Projects />
-          <Skills />
-          <OpenSource />
-          <Contact />
-        </motion.main>
-        <Footer />
-      </div>
+      <Switch>
+        {/* Admin routes */}
+        <Route path="/admin/login" component={AdminLogin} />
+        <Route path="/admin/skills" component={AdminSkills} />
+        <Route path="/admin" component={Admin} />
+        
+        {/* Portfolio route */}
+        <Route path="/" component={Portfolio} />
+        
+        {/* 404 route */}
+        <Route component={NotFound} />
+      </Switch>
       <Toaster />
     </QueryClientProvider>
   );
