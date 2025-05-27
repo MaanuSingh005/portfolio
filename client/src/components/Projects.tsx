@@ -19,6 +19,7 @@ const Projects = () => {
       description: "A Clinical Research Center app for doctors, providing essential resources.",
       technologies: ["React Native", "API Integration", "Workflow Automation"],
       image: "crc-wb-app",
+
     },
     {
       title: "CRC Web Admin Portal",

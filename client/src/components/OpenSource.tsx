@@ -21,21 +21,21 @@ const OpenSource = () => {
       icon: <FaReact className="h-6 w-6" />,
       title: "React.js UI Libraries",
       description: "Contributed to popular React component libraries, fixing bugs and adding new features to improve developer experience.",
-      link: "#",
+      link: "https://react.dev/community",
       linkText: "View Contributions",
     },
     {
       icon: <FaStackOverflow className="h-6 w-6" />,
       title: "Stack Overflow",
       description: "Actively answer questions related to React, Node.js, and modern web development to help fellow developers.",
-      link: "#",
+      link: "https://stackoverflow.com/users/16972252/kamal-jeet-singh",
       linkText: "View Profile",
     },
     {
       icon: <FaGithub className="h-6 w-6" />,
       title: "GitHub Repositories",
       description: "Maintain several open-source repositories with utilities, starter templates, and learning resources for web developers.",
-      link: "#",
+      link: "https://github.com/MaanuSingh005?tab=repositories",
       linkText: "View Repositories",
     },
   ];
@@ -100,7 +100,7 @@ const OpenSource = () => {
         
         <div className="mt-12 text-center">
           <Button variant="outline" size="lg" asChild>
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center">
+            <a href="https://github.com/MaanuSingh005" target="_blank" rel="noopener noreferrer" className="inline-flex items-center">
               <FaGithub className="mr-2" />
               View My GitHub Profile
             </a>

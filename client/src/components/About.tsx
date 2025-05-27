@@ -3,7 +3,9 @@ import { Code, Server, Plug, Cog, Download } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ImageSlideshow from "./ImageSlideshow";
-import cvPdfPath from "../assets/kamal-jeet-cv.pdf";
+// import cvPdfPath from "../assets/KamalJeet-Software-developer.pdf";
+import cvPdfPath from "../assets/KamalJeet-Software-developer.pdf";
+
 
 const About = () => {
   const expertiseItems = [
@@ -129,12 +131,12 @@ const About = () => {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <Button variant="outline" asChild className="flex items-center gap-2">
-                  <a href={cvPdfPath} download="kamal-jeet-cv.pdf">
+                {/* <Button variant="outline" asChild className="flex items-center gap-2">
+                  <a href={cvPdfPath} download="KamalJeet-Software-developer.pdf">
                     <Download size={16} className="mr-1" />
                     Resume
                   </a>
-                </Button>
+                </Button> */}
               </motion.div>
             </div>
           </motion.div>

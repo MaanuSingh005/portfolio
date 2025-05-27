@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Github, Linkedin, Download } from "lucide-react";
 import { FaStackOverflow } from "react-icons/fa";
 import ImageSlideshow from "./ImageSlideshow";
-import cvPdfPath from "../assets/kamal-jeet-cv.pdf";
+import cvPdfPath from "../assets/KamalJeet-Software-developer.pdf";
+import ProfileSlideshow from "./ProfileSlideshow";
 
 const Home = () => {
   return (
@@ -55,16 +56,16 @@ const Home = () => {
                 <a href="#projects">View projects</a>
               </Button>
               <Button variant="secondary" asChild className="flex items-center gap-2">
-                <a href={cvPdfPath} download="kamal-jeet-cv.pdf">
+                <a href={cvPdfPath} download="KamalJeet-Software-developer.pdf">
                   <Download size={16} className="mr-1" />
-                  Download CV
+                  Resume
                 </a>
               </Button>
             </div>
             
             <div className="mt-8 flex space-x-4">
               <a 
-                href="https://github.com/" 
+                href="https://github.com/MaanuSingh005" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full flex items-center justify-center border border-border hover:border-primary hover:text-primary hover:bg-primary/10 transition-all"
@@ -72,7 +73,7 @@ const Home = () => {
                 <Github size={18} />
               </a>
               <a 
-                href="https://linkedin.com/" 
+                href="https://linkedin.com/in/kamaljeet05" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full flex items-center justify-center border border-border hover:border-primary hover:text-primary hover:bg-primary/10 transition-all"
@@ -80,7 +81,7 @@ const Home = () => {
                 <Linkedin size={18} />
               </a>
               <a 
-                href="https://stackoverflow.com/" 
+                href="https://stackoverflow.com/users/16972252/kamal-jeet-singh" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full flex items-center justify-center border border-border hover:border-primary hover:text-primary hover:bg-primary/10 transition-all"
@@ -100,7 +101,7 @@ const Home = () => {
               <div className="absolute -inset-1 bg-gradient-to-r from-primary to-blue-400 rounded-full blur opacity-30 animate-pulse-slow"></div>
               <div className="relative rounded-full overflow-hidden border-4 border-background w-64 h-64 md:w-80 md:h-80 shadow-xl">
                 {/* Image Slideshow */}
-                <ImageSlideshow 
+                <ProfileSlideshow 
                   interval={3500}
                   autoplay={true}
                   rounded={true}

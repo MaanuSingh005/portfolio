@@ -115,14 +115,24 @@ export const openSourceContributions = [
 export const education = [
   {
     id: 1,
-    degree: "Bachelor of Technology in Computer Science",
-    institution: "Guru Gobind Singh Indraprastha University",
-    location: "Delhi, India",
-    period: "2017 - 2021",
-    description: "Focused on software development, algorithms, and data structures. Graduated with distinction.",
-    courses: ["Data Structures & Algorithms", "Database Management Systems", "Object-Oriented Programming", "Web Development"],
-    achievements: "Received academic excellence scholarship for consecutive 3 years",
+    degree: "Bachelor of Technology in Computer Science and Engineering",
+    institution: "Shri Venkateshwara University",
+    location: "Gajraula, Uttar Pradesh, India",
+    period: "2023 - 2027",
+    description: "Focused on core computer science subjects including software engineering, data structures, algorithms, and modern development practices.",
+    courses: [
+      "Data Structures & Algorithms",
+      "Database Management Systems",
+      "Object-Oriented Programming",
+      "Web Development",
+      "Operating Systems",
+      "Computer Networks",
+      "Artificial Intelligence",
+      "Cloud Computing"
+    ],
+    achievements: "Top 5% of the class, contributed to open-source projects, participated in university-level hackathons."
   },
+  
   {
     id: 2,
     degree: "Full-Stack Web Development Certification",
@@ -135,14 +145,23 @@ export const education = [
   },
   {
     id: 3,
-    degree: "Diploma in IT enable services and management",
+    degree: "Diploma in IT Enabled Services and Management",
     institution: "Integrated Institute of Technology",
-    location: "New Delhi, India",
-    period: "2015 - 2017",
-    description: "Science stream with focus on Physics, Chemistry, and Mathematics.",
-    courses: ["Physics", "Chemistry", "Mathematics", "Computer Science"],
-    achievements: "School prefect and member of the coding club",
+    location: "Dwarka Sector -9, New Delhi, India",
+    period: "2018 - 2021",
+    description: "Comprehensive diploma program focused on information technology, business processes, and management skills.",
+    courses: [
+      "Information Technology",
+      "Business Communication",
+      "Office Automation Tools",
+      "Web Development",
+      "Database Management",
+      "E-commerce",
+      "Computer Networks"
+    ],
+    achievements: "Graduated with distinction, led a team project on web-based business solutions, and participated in inter-college tech competitions."
   }
+  
 ];
 
 // Contact information
@@ -152,7 +171,7 @@ export const contactInfo = {
   location: "Dwarka Sec-25, New Delhi",
   socials: {
     github: "https://https://github.com/MaanuSingh005",
-    linkedin: "https://linkedin.com/",
+    linkedin: "www.linkedin.com/in/kamal-jeet-005m",
     stackoverflow: "https://stackoverflow.com/",
   },
 };

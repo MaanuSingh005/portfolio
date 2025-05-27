@@ -52,15 +52,15 @@ const Contact = () => {
   const socialLinks = [
     {
       icon: <FaGithub className="h-5 w-5" />,
-      url: "https://github.com/",
+      url: "https://github.com/MaanuSingh005",
     },
     {
       icon: <FaLinkedinIn className="h-5 w-5" />,
-      url: "https://linkedin.com/",
+      url: "https://www.linkedin.com/in/kamaljeet05/",
     },
     {
       icon: <FaStackOverflow className="h-5 w-5" />,
-      url: "https://stackoverflow.com/",
+      url: "https://stackoverflow.com/users/16972252/kamal-jeet-singh",
     },
   ];
 
@@ -121,7 +121,6 @@ const Contact = () => {
       setIsSubmitting(false);
     }
   };
-
   return (
     <section id="contact" className="py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
