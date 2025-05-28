@@ -1,5 +1,5 @@
 {
-  "homepage": "https://github.com/MaanuSingh005/portfolio.git",
+  "homepage": "https://github.com/MaanuSingh005/portfolio",
   "name": "rest-express",
   "version": "1.0.0",
   "type": "module",
@@ -11,7 +11,8 @@
     "check": "tsc",
     "db:push": "drizzle-kit push",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist/public"
+
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
