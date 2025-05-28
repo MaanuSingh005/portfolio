@@ -1,3 +1,4 @@
+import { Router } from "wouter";
 import { useEffect } from "react";
 import { Route, Switch } from "wouter";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -16,6 +17,7 @@ import Footer from "./components/Footer";
 import { motion } from "framer-motion";
 import { AuthProvider } from "./hooks/use-auth";
 import { ProtectedRoute } from "./lib/protected-route";
+
 
 // Admin pages
 import Admin from "./pages/Admin";
@@ -76,32 +78,62 @@ const Portfolio = () => {
 
 // App component implementation
 
+// function App() {
+//   return (
+//     <QueryClientProvider client={queryClient}>
+//       <AuthProvider>
+//         <Switch>
+//           {/* Admin routes */}
+//           <ProtectedRoute path="/admin/projects" component={AdminProjects} />
+//           <ProtectedRoute path="/admin/skills" component={AdminSkills} />
+//           <ProtectedRoute path="/admin/theme" component={AdminTheme} />
+//           <ProtectedRoute path="/admin" component={Admin} />
+          
+//           {/* Admin login route */}
+//           <Route path="/admin/login" component={AdminLogin} />
+          
+//           {/* Auth page */}
+//           <Route path="/auth" component={AuthPage} />
+          
+//           {/* Portfolio route */}
+//           <Route path="/" component={Portfolio} />
+          
+//           {/* 404 route */}
+//           <Route component={NotFound} />
+//         </Switch>
+//         <Toaster />
+//       </AuthProvider>
+//     </QueryClientProvider>
+//   );
+// }
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Switch>
-          {/* Admin routes */}
-          <ProtectedRoute path="/admin/projects" component={AdminProjects} />
-          <ProtectedRoute path="/admin/skills" component={AdminSkills} />
-          <ProtectedRoute path="/admin/theme" component={AdminTheme} />
-          <ProtectedRoute path="/admin" component={Admin} />
-          
-          {/* Admin login route */}
-          <Route path="/admin/login" component={AdminLogin} />
-          
-          {/* Auth page */}
-          <Route path="/auth" component={AuthPage} />
-          
-          {/* Portfolio route */}
-          <Route path="/" component={Portfolio} />
-          
-          {/* 404 route */}
-          <Route component={NotFound} />
-        </Switch>
-        <Toaster />
-      </AuthProvider>
-    </QueryClientProvider>
+    <Router base={import.meta.env.PROD ? "/portfolio" : "/"}>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <Switch>
+            {/* Admin routes */}
+            <ProtectedRoute path="/admin/projects" component={AdminProjects} />
+            <ProtectedRoute path="/admin/skills" component={AdminSkills} />
+            <ProtectedRoute path="/admin/theme" component={AdminTheme} />
+            <ProtectedRoute path="/admin" component={Admin} />
+
+            {/* Admin login route */}
+            <Route path="/admin/login" component={AdminLogin} />
+
+            {/* Auth page */}
+            <Route path="/auth" component={AuthPage} />
+
+            {/* Portfolio route */}
+            <Route path="/" component={Portfolio} />
+
+            {/* 404 route */}
+            <Route component={NotFound} />
+          </Switch>
+          <Toaster />
+        </AuthProvider>
+      </QueryClientProvider>
+    </Router>
   );
 }
 
