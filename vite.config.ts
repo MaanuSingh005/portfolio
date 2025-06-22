@@ -10,7 +10,7 @@ const __dirname = dirname(__filename);
 
 
 export default defineConfig({
-  base: '/portfolio/', // ✅ This is required for GitHub Pages to resolve assets correctly
+  base: '/portfolio/',
   plugins: [
     react(),
     runtimeErrorOverlay(),

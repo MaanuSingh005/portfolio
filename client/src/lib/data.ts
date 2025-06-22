@@ -6,8 +6,8 @@ export const projects = [
     period: "11/2023 - Present",
     description: "A Clinical Research Center app for doctors, providing essential resources.",
     technologies: ["React Native", "API Integration", "Workflow Automation"],
-    demoLink: "#",
-    codeLink: "#",
+    demoLink: "http://moodleanalytics.s3-website.ap-south-1.amazonaws.com/login",
+    codeLink: "http://moodleanalytics.s3-website.ap-south-1.amazonaws.com/login",
   },
   {
     id: 2,
@@ -15,8 +15,8 @@ export const projects = [
     period: "05/2023 - 10/2023",
     description: "Admin panel for content management using React.js.",
     technologies: ["React.js", "API Integration", "Admin Dashboard"],
-    demoLink: "#",
-    codeLink: "#",
+    demoLink: "https://crc.walterbushnell.com/login",
+    codeLink: "https://crc.walterbushnell.com/login",
   },
   {
     id: 3,
@@ -24,8 +24,8 @@ export const projects = [
     period: "09/2023 - 05/2024",
     description: "An education platform for students and teachers.",
     technologies: ["React.js", "Moodle", "DataLake"],
-    demoLink: "#",
-    codeLink: "#",
+    demoLink: "https://play.google.com/store/apps/details?id=com.apeejay.apeejayparentapp&hl=en_IN",
+    codeLink: "https://play.google.com/store/apps/details?id=com.apeejay.apeejayparentapp&hl=en_IN",
   },
   {
     id: 4,
@@ -33,8 +33,8 @@ export const projects = [
     period: "04/2023 - 08/2023",
     description: "A task management system for workflow automation.",
     technologies: ["Adalo", "Zapier", "Task Management"],
-    demoLink: "#",
-    codeLink: "#",
+    demoLink: "https://smartworkflow-ho.apeejay.edu/login",
+    codeLink: "https://smartworkflow-ho.apeejay.edu/login",
   },
 ];
 
