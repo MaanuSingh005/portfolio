@@ -84,23 +84,19 @@ const handleSubmit = async (e: React.FormEvent) => {
   setIsSubmitting(true);
 
   try {
-    const result = await emailjs.send(
-      
-      
-      import.meta.env.VITE_EMAILJS_SERVICE_ID!,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID!,
-      {
-        from_name: formValues.name,
-        from_email: formValues.email,
-        subject: formValues.subject,
-        message: formValues.message,
-        time: new Date().toLocaleString(),
-      },
+const result = await emailjs.send(
+  import.meta.env.VITE_EMAILJS_SERVICE_ID!,
+  import.meta.env.VITE_EMAILJS_TEMPLATE_ID!,
+  {
+    name: formValues.name,               // ✅ matches {{name}}
+    from_email: formValues.email,        // ✅ matches {{from_email}}
+    subject: formValues.subject,         // ✅ matches {{subject}}
+    message: formValues.message,         // ✅ matches {{message}}
+    time: new Date().toLocaleString(),   // ✅ matches {{time}}
+  },
+  import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+);
 
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      
-      
-    );
 
     console.log(result.text);
 
