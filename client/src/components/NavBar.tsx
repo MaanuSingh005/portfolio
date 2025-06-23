@@ -73,7 +73,6 @@ const NavBar = () => {
           <div className="flex items-center space-x-4">
             <ThemeToggle />
             
-            {/* Admin Login/Logout Button */}
             {user ? (
               <div className="hidden md:flex items-center space-x-2">
                 <a 
@@ -103,7 +102,6 @@ const NavBar = () => {
               </a>
             )}
             
-            {/* Mobile Menu Button */}
             <button 
               className="md:hidden text-foreground"
               onClick={() => setIsOpen(!isOpen)}
@@ -114,7 +112,6 @@ const NavBar = () => {
           </div>
         </div>
         
-        {/* Mobile Navigation */}
         {isOpen && (
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
