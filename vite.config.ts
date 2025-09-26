@@ -10,7 +10,9 @@ const __dirname = dirname(__filename);
 
 
 export default defineConfig({
-  base: '/portfolio/',
+  // Use VITE_BASE env var when set so we can build with different base paths
+  // e.g. for GitHub Pages set VITE_BASE=/portfolio/ before building.
+  base: process.env.VITE_BASE || '/',
   plugins: [
     react(),
     runtimeErrorOverlay(),
