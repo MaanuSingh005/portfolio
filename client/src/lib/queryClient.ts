@@ -20,6 +20,17 @@ export async function apiRequest(
   });
 
   await throwIfResNotOk(res);
+  // ensure the response is JSON before returning — protect callers from HTML index pages
+  const contentType = res.headers.get("content-type") || "";
+  if (!contentType.includes("application/json")) {
+    const text = await res.text();
+    throw new Error(
+      `Expected JSON response but received content-type='${contentType}' with body: ${
+        (text || "<empty>").slice(0, 800)
+      }`,
+    );
+  }
+
   return res;
 }
 
@@ -38,6 +49,18 @@ export const getQueryFn: <T>(options: {
     }
 
     await throwIfResNotOk(res);
+    // Guard: verify we actually received JSON. If a hosting platform returns the SPA
+    // HTML (eg. index.html) for unknown routes, this will surface a clear error.
+    const contentType = res.headers.get("content-type") || "";
+    if (!contentType.includes("application/json")) {
+      const text = await res.text();
+      throw new Error(
+        `Expected JSON response but received content-type='${contentType}' with body: ${
+          (text || "<empty>").slice(0, 800)
+        }`,
+      );
+    }
+
     return await res.json();
   };
 
