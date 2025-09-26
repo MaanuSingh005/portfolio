@@ -4,10 +4,9 @@
 
 [context.production.environment]
   NODE_ENV = "production"
-
-[redirects]
-  # SPA redirect: serve index.html for all routes with 200
-  [[redirects]]
-    from = "/*"
-    to = "/index.html"
-    status = 200
+ 
+ # SPA redirect: serve index.html for all routes with 200
+ [[redirects]]
+   from = "/*"
+   to = "/index.html"
+   status = 200
