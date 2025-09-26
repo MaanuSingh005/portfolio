@@ -7,11 +7,17 @@
   "scripts": {
     "dev": "tsx server/index.ts",
     "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
+    "postbuild": "node ./scripts/postbuild-tools.js",
+    "build:gh-pages": "cross-env VITE_BASE=/portfolio/ npm run build",
+    "build:netlify": "cross-env VITE_BASE=/ npm run build",
+    "build:vercel": "cross-env VITE_BASE=/ npm run build",
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "check": "tsc",
     "db:push": "drizzle-kit push",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist/public"
+    "predeploy": "npm run build:gh-pages",
+    "deploy": "gh-pages -d dist/public",
+    "deploy:netlify": "echo 'For Netlify, connect repo and set build command to \"npm run build:netlify\" and publish directory to \"dist/public\"'",
+    "deploy:vercel": "echo 'For Vercel, set Framework Preset to \"Other\" and build command to \"npm run build:vercel\" with output directory \"dist/public\"'"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
