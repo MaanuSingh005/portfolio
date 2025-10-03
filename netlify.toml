@@ -1,6 +1,6 @@
 [build]
   # avoid using `cross-env` in the build command on Netlify (it may not be available)
-  command = "npm run build"
+  command = "npm run build:netlify"
   publish = "dist/public"
 
 [context.production.environment]
