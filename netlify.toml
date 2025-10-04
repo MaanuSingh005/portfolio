@@ -1,11 +1,14 @@
 [build]
-  # avoid using `cross-env` in the build command on Netlify (it may not be available)
+  # Using npm run build directly and setting VITE_BASE in environment
   command = "npm run build:netlify"
   publish = "dist/public"
 
+[build.environment]
+  NODE_ENV = "production"
+  VITE_BASE = "/"
+
 [context.production.environment]
   NODE_ENV = "production"
-  # set VITE_BASE here instead of using cross-env in the command
   VITE_BASE = "/"
  
  # SPA redirect: serve index.html for all routes with 200
