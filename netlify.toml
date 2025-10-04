@@ -1,6 +1,6 @@
 [build]
-  # Using npm run build directly and setting VITE_BASE in environment
-  command = "npm run build:netlify"
+  # Simple build command that should work reliably
+  command = "npm install && npm run build:netlify"
   publish = "dist/public"
 
 [build.environment]
