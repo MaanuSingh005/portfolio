@@ -1,6 +1,6 @@
 [build]
-  # Simple build command that should work reliably
-  command = "npm install && npm run build:netlify"
+  # Install dependencies and run the Netlify-specific build
+  command = "npm ci && npm run build:netlify"
   publish = "dist/public"
 
 [build.environment]
