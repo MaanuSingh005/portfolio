@@ -1,18 +1,22 @@
 [build]
-  # Install dependencies and run the Netlify-specific build
-  command = "npm ci && npm run build:netlify"
+  # Netlify automatically installs dependencies (npm install). Only run build.
+  command = "npm run build:netlify"
   publish = "dist/public"
+
+
 
 [build.environment]
   NODE_ENV = "production"
   VITE_BASE = "/"
+  NODE_VERSION = "20"
 
 [context.production.environment]
   NODE_ENV = "production"
   VITE_BASE = "/"
  
- # SPA redirect: serve index.html for all routes with 200
- [[redirects]]
-   from = "/*"
-   to = "/index.html"
-   status = 200
+# SPA redirect: serve index.html for all routes with 200.
+# NOTE: _redirects file generated during postbuild already handles this; keeping for clarity.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
