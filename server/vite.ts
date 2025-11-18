@@ -28,9 +28,14 @@ export async function setupVite(app: Express, server: Server) {
     hmr: { server },
     allowedHosts: true,
   };
+  // The imported viteConfig is an async factory (defineConfig(async () => ...)).
+  // We must execute it to obtain the actual config object; spreading the function
+  // itself results in an empty object and loses root/alias settings, causing Vite
+  // to look for /src in the wrong directory.
+  const resolvedConfig = typeof viteConfig === "function" ? await viteConfig() : viteConfig;
 
   const vite = await createViteServer({
-    ...viteConfig,
+    ...resolvedConfig,
     configFile: false,
     customLogger: {
       ...viteLogger,
