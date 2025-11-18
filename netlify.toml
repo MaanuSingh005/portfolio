@@ -14,6 +14,8 @@
   NODE_ENV = "production"
   VITE_BASE = "/"
  
+
+ 
 # SPA redirect: serve index.html for all routes with 200.
 # NOTE: _redirects file generated during postbuild already handles this; keeping for clarity.
 [[redirects]]
